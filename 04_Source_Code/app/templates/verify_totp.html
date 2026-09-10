@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Enter your one-time code</h1>
+  <p>Open your authenticator app and enter the 6-digit code shown for this account.</p>
+  <form method="post">
+    <label>Code <input type="text" name="code" inputmode="numeric" pattern="[0-9]{6}" required></label>
+    <button type="submit">Verify</button>
+  </form>
+{% endblock %}

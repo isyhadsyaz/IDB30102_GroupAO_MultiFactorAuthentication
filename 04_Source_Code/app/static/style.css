@@ -1,0 +1,7 @@
+body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 2rem; }
+.card { max-width: 380px; margin: 3rem auto; background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 2rem; }
+label { display: block; margin-bottom: 1rem; font-size: 0.9rem; color: #1e293b; }
+input { display: block; width: 100%; padding: 0.5rem; margin-top: 0.3rem; box-sizing: border-box; }
+button { background: #0e7c86; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; cursor: pointer; }
+code { display: block; word-break: break-all; background: #f1f5f9; padding: 0.5rem; border-radius: 4px; }
+.flash { color: #b31b1b; padding-left: 1.1rem; }
