@@ -1,0 +1,62 @@
+{
+  "description": "Sample login request payloads used to exercise the prototype during preliminary testing. Values here are synthetic test data only, not real credentials.",
+  "requests": [
+    {
+      "case": "normal_login_stage1",
+      "endpoint": "/login",
+      "method": "POST",
+      "body": { "username": "alice_test", "password": "CorrectHorse123!" },
+      "expected_stage1_result": "password_success, redirect to /verify"
+    },
+    {
+      "case": "normal_login_stage2",
+      "endpoint": "/verify",
+      "method": "POST",
+      "body": { "code": "<current 6-digit code from authenticator app>" },
+      "expected_stage2_result": "totp_success, session created, redirect to /dashboard"
+    },
+    {
+      "case": "wrong_password",
+      "endpoint": "/login",
+      "method": "POST",
+      "body": { "username": "alice_test", "password": "wrongpassword" },
+      "expected_stage1_result": "password_fail, failed_attempts incremented"
+    },
+    {
+      "case": "brute_force_attempt",
+      "endpoint": "/login",
+      "method": "POST",
+      "body": { "username": "alice_test", "password": "<one of a list of common passwords>" },
+      "expected_stage1_result": "password_fail on each attempt; account locked after MAX_FAILED_ATTEMPTS (default 5)"
+    },
+    {
+      "case": "stolen_credential_reuse",
+      "endpoint": "/login",
+      "method": "POST",
+      "body": { "username": "alice_test", "password": "CorrectHorse123!" },
+      "note": "Correct password submitted by someone other than the account owner, with no access to the owner's authenticator app.",
+      "expected_stage2_result": "blocked at /verify because no valid one-time code is available"
+    },
+    {
+      "case": "invalid_totp_code",
+      "endpoint": "/verify",
+      "method": "POST",
+      "body": { "code": "000000" },
+      "expected_stage2_result": "totp_fail, access refused"
+    },
+    {
+      "case": "expired_totp_code",
+      "endpoint": "/verify",
+      "method": "POST",
+      "body": { "code": "<a code captured more than 60 seconds earlier>" },
+      "expected_stage2_result": "totp_fail, outside the valid time window"
+    },
+    {
+      "case": "skip_second_factor",
+      "endpoint": "/dashboard",
+      "method": "GET",
+      "note": "Direct request to the dashboard route immediately after stage 1, without completing /verify.",
+      "expected_result": "redirect to /login because session[\"user\"] is never set until stage 2 succeeds"
+    }
+  ]
+}

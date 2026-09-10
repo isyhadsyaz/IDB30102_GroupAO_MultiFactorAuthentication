@@ -1,0 +1,4 @@
+username,password_plaintext_for_testing_only,totp_secret_for_testing_only
+alice_test,CorrectHorse123!,JBSWY3DPEHPK3PXP
+bob_test,TrainStation88#,KRSXG5CTMVRXEZLU
+carol_test,PurpleZebra2026$,MFRGGZDFMZTWQ2LK
