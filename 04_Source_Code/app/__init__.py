@@ -10,7 +10,7 @@ from flask import Flask
 from .models import db
 
 
-def create_app(test_config: dict | None = None) -> Flask:
+def create_app(test_config=None) -> Flask:
     app = Flask(__name__)
     app.config.from_mapping(
         SECRET_KEY="dev-secret-key-change-before-deployment",
